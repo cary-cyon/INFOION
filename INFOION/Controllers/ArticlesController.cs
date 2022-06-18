@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INFOION.Data;
 using INFOION.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INFOION.Controllers
 {
@@ -20,6 +21,7 @@ namespace INFOION.Controllers
         }
 
         // GET: Articles
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var infoionDbContext = _context.Articles.Include(a => a.Category).Include(a => a.Country).Include(a => a.Publisher).Include(a => a.Source);

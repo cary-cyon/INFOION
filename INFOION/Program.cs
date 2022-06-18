@@ -1,4 +1,5 @@
 using INFOION.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,12 @@ builder.Services.AddDbContext<InfoionDbContext>(
                                                 options => options.UseSqlServer(
                                                     builder.Configuration.GetConnectionString("DefaultConnection"))
                                                 );
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => //CookieAuthenticationOptions
+                {
+        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account");
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +31,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();    // аутентификация
+app.UseAuthorization();     // авторизация
 
 app.MapControllerRoute(
     name: "default",
