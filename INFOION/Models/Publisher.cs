@@ -8,5 +8,10 @@
         public string LastName { get; set; }
         public string Company { get; set; }
         public List<Country> Countries { get; set; }
+        public override string ToString()
+        {
+            return Name + " " + LastName;
+        }
     }
+
 }
