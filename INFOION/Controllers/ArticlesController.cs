@@ -38,6 +38,7 @@ namespace INFOION.Controllers
                 .Include(a => a.Publisher)
                 .Include(a => a.Source)
                 .Include(a => a.Comments)
+                .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
              
             if (article == null)
