@@ -1,10 +1,11 @@
 ﻿@model INFOION.Models.User
-
+ @{
+    ViewData["Title"] = "Regist";
+}
 <h2>Вход на сайт</h2>
  
-<a asp-action="Regist" asp-controller="Account">Регистрация</a>
  
-<form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+<form asp-action="Regist" asp-controller="Account" asp-anti-forgery="true">
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
         <div class="form-group">
@@ -18,7 +19,11 @@
             <span asp-validation-for="LastName" />
         </div>
         <div class="form-group">
-            <input type="submit" value="Войти" class="btn btn-outline-dark" />
+            <label asp-for="CountryId" class="control-label"></label>
+            <select asp-for="CountryId" class ="form-control" asp-items="ViewBag.CountryId"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Pегистрация" class="btn btn-outline-dark" />
         </div>
     </div>
 </form>
