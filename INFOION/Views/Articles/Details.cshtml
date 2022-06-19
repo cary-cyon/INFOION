@@ -76,6 +76,12 @@
         </tbody>
     </table>
 </div>
+
+<div class="row">
+    <a asp-action="Index" asp-controller = "Comments" asp-route-id="@Model?.Id">AddComment</a>
+</div>
+
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

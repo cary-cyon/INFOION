@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using INFOION.Data;
 using INFOION.Models;
 using Microsoft.AspNetCore.Authorization;
+
 namespace INFOION.Controllers
 {
     [Authorize]
