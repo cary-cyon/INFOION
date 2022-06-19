@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INFOION.Data;
@@ -11,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace INFOION.Controllers
 {
+    [Authorize]
     public class ArticlesController : Controller
     {
         private readonly InfoionDbContext _context;
@@ -21,7 +18,7 @@ namespace INFOION.Controllers
         }
 
         // GET: Articles
-        [Authorize]
+        
         public async Task<IActionResult> Index()
         {
             var infoionDbContext = _context.Articles.Include(a => a.Category).Include(a => a.Country).Include(a => a.Publisher).Include(a => a.Source);
@@ -41,6 +38,7 @@ namespace INFOION.Controllers
                 .Include(a => a.Country)
                 .Include(a => a.Publisher)
                 .Include(a => a.Source)
+                .Include(a => a.Comments.Select(c => c.User))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {

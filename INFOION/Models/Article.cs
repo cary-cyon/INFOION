@@ -19,7 +19,7 @@
         [ForeignKey("Source")]
         public int SourceId { get; set; }
         public Source Source { get; set; }
-
+        public List<Comment> Comments { get; set; }
         public override string ToString()
         {
             return Name;

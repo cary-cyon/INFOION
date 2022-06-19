@@ -23,6 +23,7 @@ namespace INFOION.Controllers
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+            
         }
         public AccountController(InfoionDbContext con)
         {
@@ -40,7 +41,7 @@ namespace INFOION.Controllers
             if (user != null)
             {
                 await Authenticate(model.Name); // аутентификация
-
+                HttpContext.Response.Cookies.Append("id", user.Id.ToString()); // сохраняем в cookies id
                 return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index");
