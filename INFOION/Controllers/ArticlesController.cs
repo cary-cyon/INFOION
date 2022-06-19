@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using INFOION.Data;
 using INFOION.Models;
 using Microsoft.AspNetCore.Authorization;
-
 namespace INFOION.Controllers
 {
     [Authorize]
@@ -38,8 +37,9 @@ namespace INFOION.Controllers
                 .Include(a => a.Country)
                 .Include(a => a.Publisher)
                 .Include(a => a.Source)
-                .Include(a => a.Comments.Select(c => c.User))
+                .Include(a => a.Comments)
                 .FirstOrDefaultAsync(m => m.Id == id);
+             
             if (article == null)
             {
                 return NotFound();
